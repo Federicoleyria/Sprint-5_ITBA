@@ -118,13 +118,53 @@ class Usuario:
                     Para salir del programa, ingresa 3.
                     {'#' * 50}
                 ''')
-                opcion = input("Selecciona una opción: ")
-            
+                opcion = input("Selecciona una opción: ") #.aca van del 1 al 15 para las funciones y todo
+                if opcion == '12':
+                    monto_dolares = int(input("Ingresa el monto en dólares: "))
+                    monto_total = calcular_monto_total(precio_dolar, monto_dolares)
+                    print(f"Monto total a gastar: {monto_total} dólares")
             else:
                 return "El usuario no tiene una tarjeta asignada."
 
 
+# FUNCIONES PUNTO 3
 
+def calcular_monto_total(precio_dolar, monto):
+    impuesto_pais = 0.9  
+    ganancias = 0.21 # se puede editar a gusto esto como el imp.pais
+    impuesto = monto * impuesto_pais
+    ganancias = monto * ganancias
+    monto_total = monto + impuesto + ganancias
+    monto_total_en_pesos = monto_total * precio_dolar
+    return monto_total_en_pesos
+
+def descontar_comision(monto, comision_porcentaje):
+    comision = monto * (comision_porcentaje / 100)
+    monto_descontado = monto - comision
+    return monto_descontado
+
+def calcular_monto_plazo_fijo(monto, tasa_interes):
+    monto_final = monto * (1 + (tasa_interes / 100))
+    return monto_final
+
+# aca tenemos que ver el monto que quieren retirar, habria que hacer una funcion para que ingrese el monto
+precio_dolar = 550
+monto_dolares = 100000 #esto es un ejemplo
+
+# monto total con impuesto pais y ganancia
+monto_total = calcular_monto_total(precio_dolar, monto_dolares)
+print(f"Monto total a gastar: {monto_total} dólares")
+
+# descuenta comision 
+monto_descontado = descontar_comision(monto_dolares, 21) # creo que asi es, hay que ver cuanto % le ponemos de descuento, yo puse 21
+print(f"Monto después de la comisión: {monto_descontado} dólares")
+
+# el total de un plazo fijo con un interes, ahora tambien le puse 7, pero podemos cambiarlo
+monto_plazo_fijo = calcular_monto_plazo_fijo(monto_dolares, 7)
+print(f"Monto final después del plazo fijo: {monto_plazo_fijo} dólares")
+
+# hay que editar los montos o los porcentajes para que no sea una locura el total de cada monto
+#me queda ver que no se ejecute primero, porque apenas ejecutas el codigo te tira los resultados
 
 usuario1 = Usuario("federico", "Classic")
 usuario1.asignar_tarjeta()
