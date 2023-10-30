@@ -81,47 +81,36 @@ class Usuario:
 
     def retirar_efectivo_cajero_automatico(self):
         print("Has seleccionado RETIRO_EFECTIVO_CAJERO_AUTOMATICO")
-        # Agrega aquí la lógica para esta función
 
     def retirar_efectivo_por_caja(self):
         print("Has seleccionado RETIRO_EFECTIVO_POR_CAJA")
-        # Agrega aquí la lógica para esta función
 
     def comprar_en_cuotas_tarjeta_credito(self):
         print("Has seleccionado COMPRA_EN_CUOTAS_TARJETA_CREDITO")
-        # Agrega aquí la lógica para esta función
 
     def comprar_tarjeta_credito(self):
         print("Has seleccionado COMPRA_TARJETA_CREDITO")
-        # Agrega aquí la lógica para esta función
 
     def alta_tarjeta_credito(self):
         print("Has seleccionado ALTA_TARJETA_CREDITO")
-        # Agrega aquí la lógica para esta función
 
     def alta_tarjeta_debito(self):
         print("Has seleccionado ALTA_TARJETA_DEBITO")
-        # Agrega aquí la lógica para esta función
 
     def alta_chequera(self):
         print("Has seleccionado ALTA_CHEQUERA")
-        # Agrega aquí la lógica para esta función
 
     def alta_cuenta_corriente(self):
         print("Has seleccionado ALTA_CUENTA_CORRIENTE")
-        # Agrega aquí la lógica para esta función
 
     def alta_cuenta_cte_moneda(self):
         print("Has seleccionado ALTA_CUENTA_CTE_MONEDA")
-        # Agrega aquí la lógica para esta función
 
     def alta_caja_ahorro_moneda(self):
         print("Has seleccionado ALTA_CAJA_DE_AHORRO_MONEDA")
-        # Agrega aquí la lógica para esta función
 
     def alta_cuenta_inversion(self):
         print("Has seleccionado ALTA_CUENTA_DE_INVERSION")
-        # Agrega aquí la lógica para esta función
 
     def comprar_dolar(self):
         monto_dolares = int(input("Ingresa el monto en dólares: "))
@@ -130,15 +119,12 @@ class Usuario:
 
     def venta_dolar(self):
         print("Has seleccionado VENTA_DOLAR")
-        # Agrega aquí la lógica para esta función
 
     def transferencia_enviada_moneda(self):
         print("Has seleccionado TRANSFERENCIA_ENVIADA_MONEDA")
-        # Agrega aquí la lógica para esta función
 
     def transferencia_recibida_moneda(self):
         print("Has seleccionado TRANSFERENCIA_RECIBIDA_MONEDA")
-        # Agrega aquí la lógica para esta función
 
     def info_cliente(self):
         if self.tarjeta:
@@ -169,7 +155,7 @@ class Usuario:
                 Para salir del programa, ingresa 3.
                 {'#' * 50}
             ''')
-            opcion = input("Selecciona una opción: ")  # Las opciones 1-15 para las funciones
+            opcion = input("Selecciona una opción: ")  #aca son las opciones 1-15 son para las funciones
             self.realizar_transaccion(opcion)
         else:
             return "El usuario no tiene una tarjeta asignada."
