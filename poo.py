@@ -233,6 +233,48 @@ def interactuar_con_cliente_classic():
         else:
             print("Opción no válida. Por favor, elige una opción válida.")
 
+def es_transaccion_valida(cliente, transaccion):
+    tipo_cliente = cliente['tipo']
+    tipo_transaccion = transaccion['tipo']
+    if tipo_cliente == 'Classic' and 'CHEQUERA' in tipo_transaccion:
+        return False
+    # Agrega aquí más condiciones según las reglas de negocio
+    return True
+
+
+def procesar_transaccion(cliente, opcion_seleccionada):
+    transaccion = crear_transaccion(opcion_seleccionada)
+    if es_transaccion_valida(cliente, transaccion):
+        cliente['transacciones'].append(transaccion)
+        print(f"Transacción {transaccion['tipo']} procesada con éxito.")
+    else:
+        print(f"Lo sentimos, la transacción {transaccion['tipo']} no es válida para tu tipo de cliente.")
+    resumen = resumen_movimientos(cliente)
+    print("\nResumen de tus transacciones:")
+    for linea in resumen:
+        print(linea)
+
+def crear_transaccion(opcion_seleccionada):
+    # Esta función debe tomar la opción seleccionada por el cliente y crear una transacción a partir de ella.
+    # La transacción debe ser un diccionario con al menos dos campos: 'tipo' y 'estado'.
+    # Debes implementar esta función según las reglas de tu negocio.
+    pass
+
+
+def resumen_movimientos(cliente):
+    # Esta función proporciona un resumen de todas las transacciones del cliente hasta el momento.
+    resumen = []
+    for transaccion in cliente['transacciones']:
+        if transaccion['estado'] == 'ACEPTADA':
+            resumen.append(f"Transacción {transaccion['numero']} aceptada: {transaccion['tipo']} por un monto de {transaccion['monto']}")
+        else:
+            resumen.append(f"Transacción {transaccion['numero']} rechazada: {transaccion['tipo']} por un monto de {transaccion['monto']}")
+    return resumen
+
+
+
+
+# ***************************************************************************************************** #
 if __name__ == "__main__":
     print("Bienvenido, por favor, seleccione una de las siguientes opciones:")
     op = int(input("1 - Cliente Classic \n2 - Cliente Gold\n3 - Cliente Black\n>> "))
