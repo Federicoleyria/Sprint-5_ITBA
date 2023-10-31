@@ -100,8 +100,7 @@ class ClienteBlack:
 
 def interactuar_con_cliente_black():
     cliente = ClienteBlack()
-    condicion = True
-    while condicion:
+    while True:
         print("\nEscribe la opción que deseas utilizar (o '0' para salir):")
         print("1 - Tarjetas de débito")
         print("2 - Cajas de ahorro")
@@ -114,7 +113,7 @@ def interactuar_con_cliente_black():
         opcion = int(input(">> "))
 
         if opcion == 0:
-            condicion = False
+            break
         elif opcion == 1:
             print(f"Tienes {cliente.tarjetas_debito} tarjetas de débito.")
         elif opcion == 2:
@@ -122,19 +121,19 @@ def interactuar_con_cliente_black():
         elif opcion == 3:
             print(f"Tienes {cliente.cuentas_corrientes} cuentas corrientes.")
         elif opcion == 4:
-            monto = float(input("Ingrese el monto a retirar: "))
+            monto = float(input("Ingrese el monto a retirar: $"))
             while monto <= 0:
-                monto = float(input("El monto a retirar no puede ser 0 o negativo. Ingreselo de nuevo: "))  
+                monto = float(input("El monto a retirar no puede ser 0 o negativo. Ingreselo de nuevo: $"))  
             cliente.realizar_retiro(monto)
         elif opcion == 5:
-            monto = float(input("Ingrese el monto a transferir: "))
+            monto = float(input("Ingrese el monto a transferir: $"))
             while monto <= 0:
-                monto = float(input("El monto a transferir no puede ser 0 o negativo. Ingreselo de nuevo: "))  
+                monto = float(input("El monto a transferir no puede ser 0 o negativo. Ingreselo de nuevo: $"))  
             cliente.realizar_transferencia_saliente(monto)
         elif opcion == 6:
-            monto = float(input("Ingrese el monto a recibir: "))
+            monto = float(input("Ingrese el monto a recibir: $"))
             while monto <=0: 
-               monto = float(input("El monto a solicitar por transferencia no puede ser menor a 0. Ingreselo de nuevo: "))  
+               monto = float(input("El monto a solicitar por transferencia no puede ser menor a 0. Ingreselo de nuevo: $"))  
             cliente.realizar_transferencia_entrante(monto)
         elif opcion == 7:
             if(cliente.tiene_chequera):
@@ -146,8 +145,7 @@ def interactuar_con_cliente_black():
 
 def interactuar_con_cliente_gold():
     cliente = ClienteGold()
-    condicion = True
-    while condicion:
+    while True:
         print("\nEscribe la opción que deseas utilizar (o '0' para salir):")
         print("1 - Tarjetas de débito")
         print("2 - Cajas de ahorro")
@@ -160,7 +158,7 @@ def interactuar_con_cliente_gold():
         opcion = int(input(">> "))
 
         if opcion == 0:
-            condicion = False
+            break
         elif opcion == 1:
             print(f"Tienes una tarjeta de débito.")
         elif opcion == 2:
@@ -168,19 +166,19 @@ def interactuar_con_cliente_gold():
         elif opcion == 3:
             print(f"Tienes {cliente.cuenta_corriente} cuenta corriente.")
         elif opcion == 4:
-            monto = float(input("Ingrese el monto a retirar: "))
+            monto = float(input("Ingrese el monto a retirar: $"))
             while monto <= 0:
-                monto = float(input("El monto a retirar no puede ser 0 o negativo. Ingreselo de nuevo: "))  
+                monto = float(input("El monto a retirar no puede ser 0 o negativo. Ingreselo de nuevo: $"))  
             cliente.realizar_retiro(monto)
         elif opcion == 5:
-            monto = float(input("Ingrese el monto a transferir: "))
+            monto = float(input("Ingrese el monto a transferir: $"))
             while monto <= 0:
-                monto = float(input("El monto a transferir no puede ser 0 o negativo. Ingreselo de nuevo: "))  
+                monto = float(input("El monto a transferir no puede ser 0 o negativo. Ingreselo de nuevo: $"))  
             cliente.realizar_transferencia_saliente(monto)
         elif opcion == 6:
-            monto = float(input("Ingrese el monto a recibir: "))
+            monto = float(input("Ingrese el monto a recibir: $"))
             while monto <=0: 
-                monto = float(input("El monto a solicitar no puede ser menor a 0. Ingreselo de nuevo: "))  
+                monto = float(input("El monto a solicitar no puede ser menor a 0. Ingreselo de nuevo: $"))  
             cliente.realizar_transferencia_entrante(monto)
         elif opcion == 7:
             if(cliente.tiene_chequera):
@@ -192,8 +190,7 @@ def interactuar_con_cliente_gold():
 
 def interactuar_con_cliente_classic():
     cliente = ClienteClassic()
-    condicion = True
-    while condicion:
+    while True:
         print("\nEscribe la opción que deseas utilizar (o '0' para salir):")
         print("1 - Tarjetas de débito")
         print("2 - Cajas de ahorro")
@@ -206,7 +203,7 @@ def interactuar_con_cliente_classic():
         opcion = int(input(">> "))
 
         if opcion == 0:
-            condicion = False
+            break
         elif opcion == 1:
             print(f"Tienes {cliente.tarjeta_debito} tarjeta de débito.")
         elif opcion == 2:
@@ -217,17 +214,17 @@ def interactuar_con_cliente_classic():
         elif opcion == 3:
             print(f"No tienes cuentas corrientes.")
         elif opcion == 4:
-            monto = float(input("Ingrese el monto a retirar: "))
+            monto = float(input("Ingrese el monto a retirar: $"))
             while monto <= 0:
-                monto = float(input("El monto a retirar no puede ser 0 o negativo. Ingreselo de nuevo: "))  
+                monto = float(input("El monto a retirar no puede ser 0 o negativo. Ingreselo de nuevo: $"))  
             cliente.realizar_retiro(monto)
         elif opcion == 5:
-            monto = float(input("Ingrese el monto a transferir: "))
+            monto = float(input("Ingrese el monto a transferir: $"))
             while monto <= 0:
-                monto = float(input("El monto a transferir no puede ser 0 o negativo. Ingreselo de nuevo: "))  
+                monto = float(input("El monto a transferir no puede ser 0 o negativo. Ingreselo de nuevo: $"))  
             cliente.realizar_transferencia_saliente(monto)
         elif opcion == 6:
-            monto = float(input("Ingrese el monto a recibir: "))
+            monto = float(input("Ingrese el monto a recibir: $"))
             while monto <= 0:
                 monto = float(input("El monto a solicitar no puede ser 0 o negativo. Ingreselo de nuevo: ")) 
             cliente.realizar_transferencia_entrante(monto)
@@ -242,10 +239,13 @@ if __name__ == "__main__":
     while op in [1, 2, 3]:
         if op == 1:
             interactuar_con_cliente_classic()
+            op = 0
         elif op == 2:
             interactuar_con_cliente_gold()
+            op = 0
         elif op == 3:
             interactuar_con_cliente_black()
+            op = 0
         else:
             print("Opción no válida. Por favor, elige una opción válida.")
             op = input("1 - Cliente Classic \n2 - Cliente Gold\n3 - Cliente Black\n>>")
