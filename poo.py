@@ -1,19 +1,33 @@
 import datetime
 
+
 class ClienteClassic:
-    def __init__(self):
+    def __init__(self, nombre, apellido, numero, dni):
+        self.nombre = nombre
+        self.apellido = apellido
+        self.numero_cuenta = numero
+        self.dni = dni
+        self.transacciones = []
         self.monto_ars = 2500
+        self.monto_usd = 100
         self.tarjeta_debito = 0
         self.caja_ahorro_pesos = 0
         self.caja_ahorro_dolares = 0
         self.retiro_diario_maximo = 10000
         self.retiros_sin_comision = 1
-        self.monto_usd = 100
-        self.transacciones = []
-        
-    def print_transacciones(self):
-        print(self.transacciones)     
-       
+        self.numero_transaccion = 0
+
+    def salida_resumen(self):
+        salida = {"numero": self.numero_cuenta, 
+                  "nombre": self.nombre,
+                  "apellido": self.apellido, 
+                  "dni": self.dni, 
+                  "tipo": "CLASSIC",
+                  "transacciones": self.transacciones
+                  }
+        print (salida)
+        return salida
+
     def realizar_retiro(self):
         transaccion = {}
         monto_retiro = float(input("Ingrese el monto a retirar: $"))
@@ -29,22 +43,22 @@ class ClienteClassic:
             transaccion = {
                 "estado": "RECHAZADA",
                 "tipo": "RETIRO_EFECTIVO_CAJERO_AUTOMATICO",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
         elif monto_retiro > self.monto_ars:
             print("Error: El monto a retirar excede sus fondos.")
             transaccion = {
                 "estado": "RECHAZADA",
                 "tipo": "RETIRO_EFECTIVO_CAJERO_AUTOMATICO",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
         else:
             if self.retiros_sin_comision > 0:
@@ -55,11 +69,11 @@ class ClienteClassic:
                 transaccion = {
                     "estado": "ACEPTADA",
                     "tipo": "RETIRO_EFECTIVO_CAJERO_AUTOMATICO",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_retiro,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion
                 }
             else:
                 comision = monto_retiro * 0.02  # Comisión del 2%
@@ -69,14 +83,15 @@ class ClienteClassic:
                 self.monto_ars -= monto_retiro
                 self.monto_ars -= comision
                 print(f"Saldo actual: ${self.monto_ars}")
+                self.numero_transaccion + 1
                 transaccion = {
                     "estado": "ACEPTADA",
                     "tipo": "RETIRO_EFECTIVO_CAJERO_AUTOMATICO",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_retiro,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
         self.transacciones.append(transaccion)
 
@@ -84,7 +99,7 @@ class ClienteClassic:
         transaccion = {}
         moneda = int(input(
             "Seleccione la moneda en la que quiere realizar la transferencia 1-USD / 2-ARS: "))
-        while moneda not in [1,2]:
+        while moneda not in [1, 2]:
             moneda = int(
                 input("Moneda incorrecta. Elija una de estas dos opciones: 1-USD / 2-ARS: "))
 
@@ -101,11 +116,11 @@ class ClienteClassic:
                 transaccion = {
                     "estado": "RECHAZADA",
                     "tipo": "TRANSFERENCIA_ENVIADA_<ARS>",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
             else:
                 print(
@@ -114,14 +129,15 @@ class ClienteClassic:
                 self.monto_ars -= comision
                 print(f"Saldo actual en ARS: ${self.monto_ars}")
                 print(f"Saldo actual en USD: ${self.monto_usd}")
+                self.numero_transaccion + 1
                 transaccion = {
                     "estado": "ACEPTADA",
                     "tipo": "TRANSFERENCIA_ENVIADA_<ARS>",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_saliente,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
         elif moneda == 1:
             monto_saliente = float(
@@ -136,11 +152,11 @@ class ClienteClassic:
                 transaccion = {
                     "estado": "RECHAZADA",
                     "tipo": "TRANSFERENCIA_ENVIADA_<USD>",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
             else:
                 print(
@@ -152,11 +168,11 @@ class ClienteClassic:
                 transaccion = {
                     "estado": "ACEPTADA",
                     "tipo": "TRANSFERENCIA_ENVIADA_<USD>",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_saliente,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
         self.transacciones.append(transaccion)
 
@@ -165,7 +181,7 @@ class ClienteClassic:
         moneda = int(input(
             "Seleccione la moneda en la que quiere realizar la transferencia 1-USD / 2-ARS: "))
 
-        while moneda not in [1,2]:
+        while moneda not in [1, 2]:
             moneda = int(
                 input("Moneda incorrecta. Elija una de estas dos opciones: 1- USD / 2 - ARS: "))
 
@@ -176,19 +192,19 @@ class ClienteClassic:
                 monto_entrante = float(
                     input("El monto no puede ser 0 o negativo. Ingreselo de nuevo: $"))
             comision = monto_entrante * 0.005  # Comisión del 0.5%
-            print(
-                f"Transferencia exitosa! Se ha aplicado una comisión de ${comision} por esta transferencia entrante")
+            self.monto_ars += monto_entrante
+            self.monto_ars -= comision
+            print(f"Transferencia exitosa! Se ha aplicado una comisión de ${comision} por esta transferencia entrante")
             print(f"Saldo actual en ARS: ${self.monto_ars}")
             print(f"Saldo actual en USD: ${self.monto_usd}")
-            self.monto_ars += (monto_entrante - comision)
             transaccion = {
                 "estado": "ACEPTADA",
                 "tipo": "TRANSFERENCIA_ENVIADA_<ARS>",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_entrante,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
         elif moneda == 1:
             monto_entrante = float(
@@ -199,17 +215,18 @@ class ClienteClassic:
             comision = monto_entrante * 0.005  # Comisión del 0.5%
             print(
                 f"Transferencia exitosa! Se ha aplicado una comisión de ${comision} por esta transferencia entrante")
+            self.monto_usd += monto_entrante
+            self.monto_usd -= comision
             print(f"Saldo actual en ARS: ${self.monto_ars}")
             print(f"Saldo actual en USD: ${self.monto_usd}")
-            self.monto_usd += (monto_entrante - comision)
             transaccion = {
                 "estado": "ACEPTADA",
                 "tipo": "TRANSFERENCIA_RECIBIDA_<USD>",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_entrante,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
 
         self.transacciones.append(transaccion)
@@ -222,11 +239,11 @@ class ClienteClassic:
             transaccion = {
                 "estado": "ACEPTADA",
                 "tipo": "ALTA_TARJETA_DEBITO",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": 1000,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
         elif self.tarjeta_debito == 1:
             print(
@@ -235,11 +252,11 @@ class ClienteClassic:
             transaccion = {
                 "estado": "RECHAZADA",
                 "tipo": "ALTA_TARJETA_DEBITO",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": 1000,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
         self.transacciones.append(transaccion)
 
@@ -247,11 +264,11 @@ class ClienteClassic:
         transaccion = {
             "estado": "RECHAZADA",
             "tipo": "COMPRA_EN_CUOTAS_TARJETA_CREDITO_<none>",
-            "cuentaNumero": 190,
+            "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
             "fecha": datetime.datetime.now(),
-            "numero": 1,
+            "numero": self.numero_transaccion 
         }
         print(
             "Tu plan actual no incluye tarjetas de crédito. Actualizalo para poder disfrutar de este beneficio y muchos más."
@@ -262,11 +279,11 @@ class ClienteClassic:
         transaccion = {
             "estado": "RECHAZADA",
             "tipo": "COMPRA_TARJETA_CREDITO_<none>",
-            "cuentaNumero": 190,
+            "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
             "fecha": datetime.datetime.now(),
-            "numero": 1,
+            "numero": self.numero_transaccion 
         }
         print(
             "Tu plan actual no incluye tarjetas de crédito. Actualizalo para poder disfrutar de este beneficio y muchos más."
@@ -277,11 +294,11 @@ class ClienteClassic:
         transaccion = {
             "estado": "RECHAZADA",
             "tipo": "ALTA_TARJETA_CREDITO_<none>",
-            "cuentaNumero": 190,
+            "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
             "fecha": datetime.datetime.now(),
-            "numero": 1,
+            "numero": self.numero_transaccion 
         }
         print(
             "Tu plan actual no incluye tarjetas de crédito. Actualizalo para poder disfrutar de este beneficio y muchos más."
@@ -292,11 +309,11 @@ class ClienteClassic:
         transaccion = {
             "estado": "RECHAZADA",
             "tipo": "ALTA_CHEQUERA",
-            "cuentaNumero": 190,
+            "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
             "fecha": datetime.datetime.now(),
-            "numero": 1,
+            "numero": self.numero_transaccion 
         }
         print(
             "Tu plan actual no incluye chequeras. Actualizalo para poder disfrutar de este beneficio y muchos más."
@@ -307,11 +324,11 @@ class ClienteClassic:
         transaccion = {
             "estado": "RECHAZADA",
             "tipo": "ALTA_CUENTA_CTE_<none>",
-            "cuentaNumero": 190,
+            "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
             "fecha": datetime.datetime.now(),
-            "numero": 1,
+            "numero": self.numero_transaccion 
         }
         print(
             "Tu plan actual no incluye cuentas corrientes. Actualizalo para poder disfrutar de este beneficio y muchos más."
@@ -327,11 +344,11 @@ class ClienteClassic:
                 transaccion = {
                     "estado": "ACEPTADA",
                     "tipo": "ALTA_CAJA_DE_AHORRO_<ARS>",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": 1000,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
             elif self.caja_ahorro_pesos == 1:
                 print(
@@ -340,11 +357,11 @@ class ClienteClassic:
                 transaccion = {
                     "estado": "RECHAZADA",
                     "tipo": "ALTA_CAJA_DE_AHORRO_<ARS>",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": 1000,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
         elif moneda == 1:
             if self.caja_ahorro_dolares == 0:
@@ -355,11 +372,11 @@ class ClienteClassic:
                 transaccion = {
                     "estado": "ACEPTADA",
                     "tipo": "ALTA_CAJA_DE_AHORRO_<USD>",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": 1000,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
             elif self.caja_ahorro_dolares == 1:
                 print(
@@ -368,11 +385,11 @@ class ClienteClassic:
                 transaccion = {
                     "estado": "RECHAZADA",
                     "tipo": "ALTA_CAJA_DE_AHORRO_<USD>",
-                    "cuentaNumero": 190,
+                    "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": 1000,
                     "fecha": datetime.datetime.now(),
-                    "numero": 1,
+                    "numero": self.numero_transaccion 
                 }
         self.transacciones.append(transaccion)
 
@@ -380,11 +397,11 @@ class ClienteClassic:
         transaccion = {
             "estado": "RECHAZADA",
             "tipo": "ALTA_CUENTA_DE_INVERSION",
-            "cuentaNumero": 190,
+            "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
             "fecha": datetime.datetime.now(),
-            "numero": 1,
+            "numero": self.numero_transaccion 
         }
         print(
             "Tu plan actual no incluye cuentas de inversión. Actualizalo para poder disfrutar de este beneficio y muchos más."
@@ -394,7 +411,8 @@ class ClienteClassic:
     def compra_dolar(self):
         # cotizacion de dolar ficticia :(
         dolar = 1000
-        monto_dolar = float(input("Ingrese el monto de dólares que desea comprar: $"))
+        monto_dolar = float(
+            input("Ingrese el monto de dólares que desea comprar: $"))
         if monto_dolar * dolar <= self.monto_ars:
             while monto_dolar <= 0:
                 monto_dolar = float(
@@ -408,23 +426,23 @@ class ClienteClassic:
             transaccion = {
                 "estado": "ACEPTADA",
                 "tipo": "COMPRA_DOLAR",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
         else:
             print("El monto de dolares que desea comprar excede sus fondos en ARS.")
             transaccion = {
-            "estado": "RECHAZADA",
-            "tipo": "COMPRA_DOLAR",
-            "cuentaNumero": 190,
-            "permitidoActualParaTransaccion": self.retiro_diario_maximo,
-            "monto": monto_dolar,
-            "fecha": datetime.datetime.now(),
-            "numero": 1,
-        }
+                "estado": "RECHAZADA",
+                "tipo": "COMPRA_DOLAR",
+                "cuentaNumero": self.numero_cuenta,
+                "permitidoActualParaTransaccion": self.retiro_diario_maximo,
+                "monto": monto_dolar,
+                "fecha": datetime.datetime.now(),
+                "numero": self.numero_transaccion 
+            }
         self.transacciones.append(transaccion)
 
     def venta_dolar(self):
@@ -441,11 +459,11 @@ class ClienteClassic:
             transaccion = {
                 "estado": "RECHAZADA",
                 "tipo": "COMPRA_DOLAR",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
         else:
             dolar = 1000
@@ -457,17 +475,21 @@ class ClienteClassic:
             transaccion = {
                 "estado": "ACEPTADA",
                 "tipo": "COMPRA_DOLAR",
-                "cuentaNumero": 190,
+                "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
                 "fecha": datetime.datetime.now(),
-                "numero": 1,
+                "numero": self.numero_transaccion 
             }
         self.transacciones.append(transaccion)
 
 
 def interactuar_con_cliente_classic():
-    cliente = ClienteClassic()
+    nombre = str(input("Nombre: "))
+    apellido = str(input("Apellido: "))
+    numero = int(input("Numero: "))
+    dni = str(input("Dni: "))
+    cliente = ClienteClassic(nombre, apellido, numero, dni)
     while True:
         print("\nEscribe la opción que deseas utilizar (o '0' para salir):")
         print("1 - Retirar efectivo desde un cajero")
@@ -522,7 +544,8 @@ def interactuar_con_cliente_classic():
             cliente.realizar_transferencia_entrante()
         else:
             print("Opción no válida. Por favor, elige una opción válida.")
-    cliente.print_transacciones()
+    cliente.salida_resumen()
+
 
 # ***************************************************************************************************** #
 if __name__ == "__main__":
