@@ -1,5 +1,4 @@
-import datetime
-
+import datetime as date
 
 class ClienteClassic:
     def __init__(self, nombre, apellido, numero, dni):
@@ -16,13 +15,22 @@ class ClienteClassic:
         self.retiro_diario_maximo = 10000
         self.retiros_sin_comision = 5
         self.numero_transaccion = 0
+        
+        fecha = date.datetime.now()
+        self.dia = fecha.day
+        self.mes = fecha.month
+        self.anio = fecha.year
+        self.hora = fecha.hour
+        self.minuto = fecha.minute
+        self.segundo = fecha.second
+        self.now = f"{self.dia}/{self.mes}/{self.anio} {self.hora}:{self.minuto}:{self.segundo}"
 
     def salida_resumen(self):
         salida = {
-            #"numero": self.numero_cuenta,
-             #     "nombre": self.nombre,
-             #     "apellido": self.apellido,
-            #      "dni": self.dni,
+                  "numero": self.numero_cuenta,
+                  "nombre": self.nombre,
+                  "apellido": self.apellido,
+                  "dni": self.dni,
                   "tipo": "CLASSIC",
                   "transacciones": self.transacciones
                   }
@@ -50,7 +58,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now,
                     "numero": self.numero_transaccion
                 }
             elif monto_retiro <= self.monto_ars:
@@ -63,7 +71,7 @@ class ClienteClassic:
                         "cuentaNumero": self.numero_cuenta,
                         "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                         "monto": None,
-                        "fecha": datetime.datetime.now(),
+                        "fecha": self.now(),
                         "numero": self.numero_transaccion
                     }
                 else:
@@ -79,7 +87,7 @@ class ClienteClassic:
                             "cuentaNumero": self.numero_cuenta,
                             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                             "monto": monto_retiro,
-                            "fecha": datetime.datetime.now(),
+                            "fecha": self.now(),
                             "numero": self.numero_transaccion
                         }
                     elif self.retiros_sin_comision not in [1,2,3,4,5]:
@@ -97,7 +105,7 @@ class ClienteClassic:
                             "cuentaNumero": self.numero_cuenta,
                             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                             "monto": monto_retiro,
-                            "fecha": datetime.datetime.now(),
+                            "fecha": self.now(),
                             "numero": self.numero_transaccion
                         }
         elif opcion == 2:
@@ -111,7 +119,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -127,7 +135,7 @@ class ClienteClassic:
                         "cuentaNumero": self.numero_cuenta,
                         "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                         "monto": monto_retiro,
-                        "fecha": datetime.datetime.now(),
+                        "fecha": self.now(),
                         "numero": self.numero_transaccion
                     }
         else:
@@ -159,7 +167,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -176,7 +184,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_saliente,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         elif moneda == 1:
@@ -195,7 +203,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -211,7 +219,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_saliente,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         self.transacciones.append(transaccion)
@@ -244,7 +252,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_entrante,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         elif moneda == 1:
@@ -266,7 +274,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_entrante,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
 
@@ -283,7 +291,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": 1000,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         elif self.tarjeta_debito == 1:
@@ -296,7 +304,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": 1000,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -308,7 +316,7 @@ class ClienteClassic:
             "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
-            "fecha": datetime.datetime.now(),
+            "fecha": self.now(),
             "numero": self.numero_transaccion
         }
         print(
@@ -323,7 +331,7 @@ class ClienteClassic:
             "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
-            "fecha": datetime.datetime.now(),
+            "fecha": self.now(),
             "numero": self.numero_transaccion
         }
         print(
@@ -338,7 +346,7 @@ class ClienteClassic:
             "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
-            "fecha": datetime.datetime.now(),
+            "fecha": self.now(),
             "numero": self.numero_transaccion
         }
         print(
@@ -353,7 +361,7 @@ class ClienteClassic:
             "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
-            "fecha": datetime.datetime.now(),
+            "fecha": self.now(),
             "numero": self.numero_transaccion
         }
         print(
@@ -374,7 +382,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         elif moneda == 2:
@@ -388,7 +396,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
 
@@ -406,7 +414,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": 1000,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif self.caja_ahorro_pesos == 1:
@@ -419,7 +427,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": 1000,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         elif moneda == 1:
@@ -434,7 +442,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": 1000,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif self.caja_ahorro_dolares == 1:
@@ -447,7 +455,7 @@ class ClienteClassic:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": 1000,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         self.transacciones.append(transaccion)
@@ -459,7 +467,7 @@ class ClienteClassic:
             "cuentaNumero": self.numero_cuenta,
             "permitidoActualParaTransaccion": self.retiro_diario_maximo,
             "monto": 1000,
-            "fecha": datetime.datetime.now(),
+            "fecha": self.now(),
             "numero": self.numero_transaccion
         }
         print(
@@ -488,7 +496,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -499,7 +507,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -521,7 +529,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -537,7 +545,7 @@ class ClienteClassic:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -563,6 +571,15 @@ class ClienteGold:
         self.cuenta_corriente_usd = 0
         self.cuenta_de_inversion = False
 
+        fecha = date.datetime.now()
+        self.dia = fecha.day
+        self.mes = fecha.month
+        self.anio = fecha.year
+        self.hora = fecha.hour
+        self.minuto = fecha.minute
+        self.segundo = fecha.second
+        self.now = f"{self.dia}/{self.mes}/{self.anio} {self.hora}:{self.minuto}:{self.segundo}"
+        
     def salida_resumen(self):
         salida = {"numero": self.numero_cuenta,
                   "nombre": self.nombre,
@@ -593,7 +610,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif monto_retiro > self.retiro_diario_maximo:
@@ -613,7 +630,7 @@ class ClienteGold:
                         "cuentaNumero": self.numero_cuenta,
                         "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                         "monto": monto_retiro,
-                        "fecha": datetime.datetime.now(),
+                        "fecha": self.now(),
                         "numero": self.numero_transaccion
                     }
         elif opcion == 2:
@@ -627,7 +644,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -643,7 +660,7 @@ class ClienteGold:
                         "cuentaNumero": self.numero_cuenta,
                         "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                         "monto": monto_retiro,
-                        "fecha": datetime.datetime.now(),
+                        "fecha": self.now(),
                         "numero": self.numero_transaccion
                     }
         else:
@@ -675,7 +692,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -692,7 +709,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_saliente,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         elif moneda == 1:
@@ -712,7 +729,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -729,7 +746,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_saliente,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         self.transacciones.append(transaccion)
@@ -763,7 +780,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_entrante,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         elif moneda == 1:
@@ -786,7 +803,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_entrante,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
 
@@ -804,7 +821,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": 1000,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         elif self.tarjeta_debito == 1:
@@ -818,7 +835,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": 1000,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -835,7 +852,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -854,7 +871,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -868,7 +885,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         self.transacciones.append(transaccion)
@@ -885,7 +902,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -903,7 +920,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -917,7 +934,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         self.transacciones.append(transaccion)
@@ -933,7 +950,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
             pass
@@ -956,7 +973,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif tipo_tarjeta == 2:
@@ -972,7 +989,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
 
@@ -990,7 +1007,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         elif self.chequera == 1:
@@ -1002,7 +1019,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -1025,7 +1042,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         elif moneda == 2:
@@ -1041,7 +1058,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif self.cuenta_corriente_ars == 2:
@@ -1055,7 +1072,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
 
@@ -1078,7 +1095,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         elif moneda == 2:
@@ -1094,7 +1111,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif self.caja_ahorro_pesos == 2:
@@ -1108,7 +1125,7 @@ class ClienteGold:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         
@@ -1124,7 +1141,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
             print(
@@ -1140,7 +1157,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         
@@ -1168,7 +1185,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -1180,7 +1197,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -1203,7 +1220,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -1220,7 +1237,7 @@ class ClienteGold:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -1246,6 +1263,15 @@ class ClienteBlack:
         self.cuenta_corriente_usd = 0
         self.cuenta_de_inversion = False
 
+        fecha = date.datetime.now()
+        self.dia = fecha.day
+        self.mes = fecha.month
+        self.anio = fecha.year
+        self.hora = fecha.hour
+        self.minuto = fecha.minute
+        self.segundo = fecha.second
+        self.now = f"{self.dia}/{self.mes}/{self.anio} {self.hora}:{self.minuto}:{self.segundo}"
+        
     def salida_resumen(self):
         salida = {"numero": self.numero_cuenta,
                   "nombre": self.nombre,
@@ -1273,7 +1299,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -1289,7 +1315,7 @@ class ClienteBlack:
                         "cuentaNumero": self.numero_cuenta,
                         "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                         "monto": monto_retiro,
-                        "fecha": datetime.datetime.now(),
+                        "fecha": self.now(),
                         "numero": self.numero_transaccion
                     }
         elif opcion == 2:
@@ -1303,7 +1329,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif monto_retiro > self.retiro_diario_maximo:
@@ -1323,7 +1349,7 @@ class ClienteBlack:
                         "cuentaNumero": self.numero_cuenta,
                         "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                         "monto": monto_retiro,
-                        "fecha": datetime.datetime.now(),
+                        "fecha": self.now(),
                         "numero": self.numero_transaccion
                     }
             else:
@@ -1337,7 +1363,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_retiro,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         self.transacciones.append(transaccion)
@@ -1365,7 +1391,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -1380,7 +1406,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_saliente,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         elif moneda == 2:
@@ -1399,7 +1425,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -1415,7 +1441,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto_saliente,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         
@@ -1448,7 +1474,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_entrante,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         elif moneda == 1:
@@ -1469,7 +1495,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_entrante,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
 
@@ -1488,7 +1514,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -1500,7 +1526,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -1517,7 +1543,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -1536,7 +1562,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -1550,7 +1576,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         self.transacciones.append(transaccion)
@@ -1567,7 +1593,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -1585,7 +1611,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             else:
@@ -1599,7 +1625,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": monto,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         self.transacciones.append(transaccion)
@@ -1615,7 +1641,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
             pass
@@ -1638,7 +1664,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif tipo_tarjeta == 2:
@@ -1654,7 +1680,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif tipo_tarjeta == 3:
@@ -1670,7 +1696,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
 
@@ -1688,7 +1714,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         elif self.chequera == 2:
@@ -1700,7 +1726,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -1722,7 +1748,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif self.cuenta_corriente_usd == 3:
@@ -1736,7 +1762,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         elif moneda == 2:
@@ -1752,7 +1778,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif self.cuenta_corriente_ars == 3:
@@ -1766,7 +1792,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
 
@@ -1789,7 +1815,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif self.caja_ahorro_dolares >= 5:
@@ -1803,7 +1829,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
                 
@@ -1820,7 +1846,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
             elif self.caja_ahorro_pesos == 5:
@@ -1834,7 +1860,7 @@ class ClienteBlack:
                     "cuentaNumero": self.numero_cuenta,
                     "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                     "monto": None,
-                    "fecha": datetime.datetime.now(),
+                    "fecha": self.now(),
                     "numero": self.numero_transaccion
                 }
         
@@ -1850,7 +1876,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
             print(
@@ -1866,7 +1892,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         
@@ -1894,7 +1920,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -1906,7 +1932,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
@@ -1929,7 +1955,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": None,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         else:
@@ -1946,7 +1972,7 @@ class ClienteBlack:
                 "cuentaNumero": self.numero_cuenta,
                 "permitidoActualParaTransaccion": self.retiro_diario_maximo,
                 "monto": monto_dolar,
-                "fecha": datetime.datetime.now(),
+                "fecha": self.now(),
                 "numero": self.numero_transaccion
             }
         self.transacciones.append(transaccion)
